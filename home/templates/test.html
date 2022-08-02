@@ -1,0 +1,28 @@
+<div id="header-wrapper">
+    <div id="header" class="container">
+        <div id="logo">
+            <h1><a href="#">Data Magnet</a></h1>
+        </div>
+        <div id="menu">
+            <ul>
+                <li class="current_page_item"><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'add_blogs' %}"><strong>Add Blogs</strong></a></li>
+                <li><a href="{% url 'logout' %}"><strong>Logout</strong></a></li>
+                {% else %}
+                <li><a href="{% url 'homepage:signup' %}"><strong>Sign Up</strong></a></li>
+                <li><a href="{% url 'login' %}"><strong>Login</strong></a></li>
+                {% endif %}
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="banner">
+        <div class="content">
+            <div><img src="images/img02.jpg" width="1000" height="400" alt="" /></div>
+        </div>
+    </div>
+</div>

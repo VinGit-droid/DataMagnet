@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %} Blogs {% endblock %}
+{% block homeactive %} active {% endblock homeactive %}
+
+{% block css %}
+{% endblock %}
+{% block header %}
+  <div id="header" class="container">
+      <div id="logo">
+          <h1><a href="#">Data Magnet</a></h1>
+      </div>
+      <div id="menu">
+          <ul>
+              <li class="current_page_item"><a href="#">Home</a></li>
+              <li><a href="#">Services</a></li>
+
+              {% if user.is_authenticated %}
+              <li><a href="{% url 'add_blogs' %}"><strong>Add Blogs</strong></a></li>
+              <li><a href="{% url 'profile' %}"><strong>Profile</strong></a></li>
+              <li><a href="{% url 'logout' %}"><strong>Logout</strong></a></li>
+              {% else %}
+              <li><a href="{% url 'register' %}"><strong>Sign Up</strong></a></li>
+              <li><a href="{% url 'login' %}"><strong>Login</strong></a></li>
+              {% endif %}
+              <li><a href="#">About</a></li>
+          </ul>
+      </div>
+  </div>
+{% endblock %}
+
+{% block banner%}
+<div id="banner">
+  <div class="content">
+    <div><img src="/static/images/img02.jpg" width="1000" height="300" alt="" /></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block intro %}
+
+<div id="page">
+  <div class="post">
+    <h2 class="title"><a href="#">Welcome to Data Magnet, {{user.username|default:'' }}</a></h2>
+    <div class="entry">
+      <p>Here at <strong>Data Magnet</strong>, we translate data into valuable and comprehensible insights. Our goal is to improve results, 
+        make the right decisions and save costs. We are a team of professionals experienced in machine learning, supervised and unsupervised 
+        algorithms and usage of data visualization techniques to present the results. We use <strong>Python</strong>, <strong>DJANGO</strong>, 
+        <strong>DJANGO-REST</strong> and <strong>MS-Excel</strong> for our data projects</p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block body %}
+<div id="page"> 
+  <div class="container mt-4 mb-3">
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-sm">
+          <div class="col-lg-4 my-4">
+              <div class="card shadow" style="width: 20rem; height: 33rem;">
+              <img src="/media/{{post.image}}" class="card-img-top" alt="..." height="150px">
+              <div class="card-body">
+                <h5 class="card-title">{{post.title}} <br><small>by {{post.author}}</small></h5>
+                <p class="card-text">{{post.content| truncatechars:50}}</p>
+                <a href="blog/{{post.slug}}" class="btn btn-primary">Read More {% if user.is_superuser %}<a href="delete_blog_post/{{post.slug}}/" class="btn btn-danger mx-4">Delete Blog</a>{% endif %}</a>
+              </div>
+          </div>
+        </div>
+      </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<!--
+
+{% block content %}
+<div id="footer-content-wrapper">
+	<div id="footer-content">
+		<div id="fbox1">
+			<h2>Django Applications</h2>
+			<ul class="style1">
+				<li class="first"><a href="#">Maecenas luctus lectus at sapien</a></li>
+				<li><a href="#">Etiam rhoncus volutpat erat</a></li>
+				<li><a href="#">Etiam posuere augue sit amet nisl</a></li>
+				<li><a href="#">Mauris vulputate dolor sit amet nibh</a></li>
+				<li><a href="#">Etiam posuere augue sit amet nisl</a></li>
+			</ul>
+		</div>
+		<div id="fbox2">
+			<h2>Data Analytics</h2>
+			<ul class="style1">
+				<li class="first"><a href="#">Maecenas luctus lectus at sapien</a></li>
+				<li><a href="#">Etiam rhoncus volutpat erat</a></li>
+				<li><a href="#">Etiam posuere augue sit amet nisl</a></li>
+				<li><a href="#">Mauris vulputate dolor sit amet nibh</a></li>
+				<li><a href="#">Etiam posuere augue sit amet nisl</a></li>
+				<li><a href="#">Etiam rhoncus volutpat erat</a></li>
+				<li><a href="#">Etiam posuere augue sit amet nisl</a></li>
+				<li><a href="#">Mauris vulputate dolor sit amet nibh</a></li>
+				<li><a href="#">Etiam posuere augue sit amet nisl</a></li>
+			</ul>
+		</div>
+		<div id="fbox3">
+			<h2>Dashboard Design</h2>
+			<ul class="style1">
+				<li class="first"><a href="#">Maecenas luctus lectus at sapien</a></li>
+				<li><a href="#">Etiam rhoncus volutpat erat</a></li>
+				<li><a href="#">Etiam posuere augue sit amet nisl</a></li>
+				<li><a href="#">Mauris vulputate dolor sit amet nibh</a></li>
+				<li><a href="#">Etiam posuere augue sit amet nisl</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+{% endblock %}
+-->
+{% block footer %}
+<div id="footer">
+	<p>&copy; Data Magnet. All rights reserved. Images by <a href="http://datamagnet.in/">Data Magnet</a>. Design by <a href="http://datamagnet.in" rel="nofollow">Data Magnet</a>.</p>
+</div>
+{% endblock %}
+
+{% block js %} 
+<script></script>
+{% endblock %}
